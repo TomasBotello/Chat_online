@@ -1,10 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const Producto = new Schema({
-    marca: String,
-    nombre: String,
-    precio: String
+const usuarios = new Schema({
+    Nombre: String,
+    email: String,
+    Contraseña: String
 })
 
-module.exports = mongoose.model('datos', Producto);
+module.exports = mongoose.model('datos', usuarios);
+
+//todo esto es la estrucutra del formulario
