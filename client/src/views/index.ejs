@@ -18,6 +18,10 @@
         .container {
             width: 300px;
             text-align: center;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .form-group {
@@ -64,17 +68,17 @@
 <body>
     <div class="container">
         <h2>Iniciar Sesión</h2>
-        <form>
+        <form action="/login" method="post">
             <div class="form-group">
-                <input type="email" id="email" placeholder="Correo Electrónico" required>
+                <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
             </div>
             <div class="form-group">
-                <input type="password" id="password" placeholder="Contraseña" required>
+                <input type="password" id="contraseña" name="contraseña" placeholder="Contraseña" required>
             </div>
             <div class="form-group">
-                <button type="submit">Iniciar Sesión</button>
-                <a href="/registro" class="register-link">Registrar</a>
+                <button type="submit">Acceder</button>
             </div>
+            <a href="/registro" class="register-link">¿No tienes una cuenta? Regístrate aquí</a>
         </form>
     </div>
 </body>

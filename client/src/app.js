@@ -1,43 +1,40 @@
-const express = require('express'); //referencia a framework express
-const app = express();//se crea la aplicacion de express
-const log = require('morgan'); //saber los clientes conectados
+const express = require('express');
+const app = express();
+const log = require('morgan');
 const bodyParser = require('body-parser');
 const path = require('path');
-
-
-
+const mongoose = require('mongoose');
+const os = require('os');
 const IndexRoutes = require('./routers/index.js');
-const { mongo, default: mongoose } = require('mongoose');
 
 
 
-app.set('port', process.env.PORT || 3000); // asigno puerto 3000
+//const ipAddress = '192.168.0.0'; //ip para abrir pagina
+
+app.set('port', process.env.PORT || 4000); //asigna el puerto 4000 y este se quita al abrir la ip
 
 
-//midelewarw utiliza morgar
 app.use(log('dev'));
-app.use(bodyParser.urlencoded({extended:false}));
-//Rutas 
-app.use('/',IndexRoutes);
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use('/', IndexRoutes);
+
+// app.listen(80, ipAddress, () => {
+//     console.log(`El servidor está funcionando en http://${ipAddress}`);
+// });
+
+app.listen(app.get('port'),() => { 
+    console.log('El servidor esta funcionando en el puerto', app.get('port')); 
+}
+);
 
 
+mongoose.connect('mongodb+srv://tbotello73:bdtbote@cluster0.fbmoru0.mongodb.net/Chat?retryWrites=true&w=majority')
+    .then(() => {
+        console.log('Conexión a la base de datos establecida');
+    })
+    .catch((err) => {
+        console.error('Error al conectar a la base de datos:', err);
+    })
 
-app.listen(app.get('port'), () => {
-    console.log('El servidor esta funcionando en el puerto', app.get('port'));
-});
-
-
-
-//conecion al a BD
-mongoose.connect("mongodb+srv://tbotello73:bdtbote@cluster0.fbmoru0.mongodb.net/Chat?retryWrites=true&w=majority")
-// mongoose.connect("mongodb+srv://node:DPkwUaILbGg558D5@cluster0.3wg4vdv.mongodb.net/Chat?retryWrites=true&w=majority")
-.then(bd=>console.log('BD conectada'))
-.catch(err=>console.log(err));
-
-
-
-//establecer un sistema de vistas
-app.set('views', path.join(__dirname,'views'));
+app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-//mensaje de conectado
-
