@@ -1,5 +1,3 @@
-// no se si esta bien
-
 const net = require('net');
 const server = net.createServer();
 
@@ -24,10 +22,6 @@ server.on('connection', (socket) => {
     });
 });
 
-server.listen(4000, () => {
+server.listen(3000, () => {
     console.log('servidor escuchando en puerto', server.address().port);
 });
-
-
-
-// no se si esta bien
